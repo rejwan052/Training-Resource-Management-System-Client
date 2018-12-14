@@ -1,1 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~bootstrap/dist/css/bootstrap.min.css';
+@import '~font-awesome/css/font-awesome.min.css';
+@import '~ngx-bootstrap/datepicker/bs-datepicker.css';
+
+/* begin:: Global Mandatory Vendors */
+@import '~perfect-scrollbar/css/perfect-scrollbar.css';
+/* end:: Global Mandatory Vendors */
+
+/* end:: Global Optional Vendors */
+@import '~tether/dist/css/tether.min.css';
+@import '~bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css';
+@import '~nouislider/distribute/nouislider.min.css';
+@import '~animate.css/animate.min.css';
+@import '~jstree/dist/themes/default/style.min.css';
+@import '~morris-js-module/morris.css';
+@import '~socicon/css/socicon.css';
+@import './assets/vendors/line-awesome/css/line-awesome.min.css';
+@import './assets/vendors/flaticon/css/flaticon.css';
+@import './assets/css/styles.css';
+/* begin:: Global Optional Vendors */
+
+/* begin::Global Theme Styles */
+@import './assets/css/style.bundle.min.css';
+/* end::Global Theme Styles */
