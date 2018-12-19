@@ -10,6 +10,8 @@ import { DesignationsComponent } from './designations/designations.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BsDatepickerModule } from "ngx-bootstrap/datepicker";
 import { FormsModule } from "@angular/forms";
+import { HttpClientModule } from "@angular/common/http";
+import { NgxPaginationModule } from "ngx-pagination";
 
 @NgModule({
   declarations: [
@@ -18,13 +20,15 @@ import { FormsModule } from "@angular/forms";
     NotFoundComponent,
     EmployeesComponent,
     DepartmentsComponent,
-    DesignationsComponent
+    DesignationsComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BsDatepickerModule.forRoot(),
-    FormsModule
+    HttpClientModule,
+    FormsModule,
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

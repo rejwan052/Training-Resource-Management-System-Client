@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
-@import '~bootstrap/dist/css/bootstrap.min.css';
+/* @import '~bootstrap/dist/css/bootstrap.min.css';
 @import '~font-awesome/css/font-awesome.min.css';
-@import '~ngx-bootstrap/datepicker/bs-datepicker.css';
+@import '~ngx-bootstrap/datepicker/bs-datepicker.css'; */
 
 /* begin:: Global Mandatory Vendors */
 @import '~perfect-scrollbar/css/perfect-scrollbar.css';
@@ -23,3 +23,5 @@
 /* begin::Global Theme Styles */
 @import './assets/css/style.bundle.min.css';
 /* end::Global Theme Styles */
+
+
