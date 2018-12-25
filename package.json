@@ -11,7 +11,7 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "~7.0.0",
+    "@angular/animations": "^7.0.4",
     "@angular/common": "~7.0.0",
     "@angular/compiler": "~7.0.0",
     "@angular/core": "~7.0.0",
@@ -33,6 +33,7 @@
     "morris-js-module": "^1.2.1",
     "ngx-bootstrap": "^3.1.3",
     "ngx-pagination": "^3.2.1",
+    "ngx-toastr": "^9.1.1",
     "nouislider": "^12.1.0",
     "owl.carousel": "^2.3.4",
     "perfect-scrollbar": "^1.4.0",
