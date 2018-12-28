@@ -2,10 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Department } from './department';
 import { ApiService } from '../shared/api.service';
 import { NgForm } from '@angular/forms';
-import * as $ from 'jquery';
 import { PageDepartment } from './page-department';
 import { HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -21,6 +19,7 @@ export class DepartmentsComponent implements OnInit {
   // For pagination
   selectedPage: number = 0;
   loading: boolean;
+  searchTerm:string = '';
 
   constructor(private apiService: ApiService, private toastr: ToastrService) { }
 
@@ -100,12 +99,29 @@ export class DepartmentsComponent implements OnInit {
     );
   }
 
+  searchDepartments(): void{
+    const params = new HttpParams()
+                  .set('name', this.searchTerm);
+    this.getAllDepartments(params);
+  }
+
   onSelect(page: number): void {
     console.log("selected page : " + page);
+
     this.selectedPage = page;
     const currentPage = page > 0 ? page - 1 : 0;
-    const params = new HttpParams().set('page', currentPage.toString());
+
+    const params = new HttpParams()
+      .set('name',this.searchTerm)
+      .set('page', currentPage.toString());
+
     console.log("params ", params);
     this.getAllDepartments(params);
   }
+
+  cancelForm(form: NgForm):void{
+    form.resetForm();
+    this.department = new Department();
+  }
+
 }

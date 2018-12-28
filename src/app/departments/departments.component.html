@@ -11,18 +11,6 @@
               <i class="m-nav__link-icon fa fa-building"></i>
             </a>
           </li>
-          <!-- <li class="m-nav__separator">-</li>
-          <li class="m-nav__item">
-            <a href="" class="m-nav__link">
-              <span class="m-nav__link-text">Resources</span>
-            </a>
-          </li>
-          <li class="m-nav__separator">-</li>
-          <li class="m-nav__item">
-            <a href="" class="m-nav__link">
-              <span class="m-nav__link-text">Timesheet</span>
-            </a>
-          </li> -->
         </ul>
       </div>
       <div>
@@ -101,23 +89,23 @@
             <div class="m-portlet__body">
               <div class="m-form__section m-form__section--first">
                 <div class="form-group m-form__group">
-                  <label for="example_input_full_name">Name *</label>
-                  <input type="text" class="form-control m-input" placeholder="Department name" name="name" [(ngModel)]="department.name" #name="ngModel"
+                  <label for="name">Name *</label>
+                  <input type="text" id="name" class="form-control m-input" placeholder="Department name" name="name" [(ngModel)]="department.name" #name="ngModel"
                     [ngClass]="{'is-invalid':f.submitted && name.invalid}" required />
                   <div *ngIf="name.invalid && (name.dirty || name.touched)" class="invalid-input">
                     <div *ngIf="name.errors?.required">Name is required</div>
                   </div>
                 </div>
                 <div class="form-group m-form__group">
-                  <label for="exampleTextarea">Description</label>
-                  <textarea class="form-control m-input" placeholder="Department description" rows="3" name="description" [(ngModel)]="department.description"></textarea>
+                  <label for="description">Description</label>
+                  <textarea class="form-control m-input" id="description" placeholder="Department description" rows="3" name="description" [(ngModel)]="department.description"></textarea>
                 </div>
               </div>
             </div>
             <div class="m-portlet__foot m-portlet__foot--fit">
               <div class="m-form__actions m-form__actions--right">
                 <button type="submit" [disabled]="f.form.pristine || f.form.invalid" class="btn btn-brand">Submit</button>
-                <button type="reset" class="btn btn-secondary ml-1">Cancel</button>
+                <button type="reset" (click)="cancelForm(f)" class="btn btn-secondary ml-1">Cancel</button>
               </div>
             </div>
           </form>
@@ -136,7 +124,7 @@
               <div class="form-group m-form__group row align-items-center">
                 <div class="col-md-6">
                   <div class="m-input-icon m-input-icon--left">
-                    <input type="text" class="form-control m-input" placeholder="Search..." id="generalSearch">
+                    <input type="text" [(ngModel)]="searchTerm" (keyup)="searchDepartments()" class="form-control m-input" placeholder="Search department by name..." id="generalSearch">
                     <span class="m-input-icon__icon m-input-icon__icon--left">
                       <span>
                         <i class="la la-search"></i>
@@ -174,19 +162,19 @@
             </tr>
           </tbody>
         </table>
-        <!-- <nav aria-label="...">
-          <ul class="pagination" *ngIf="pageDepartment?.content">
-            <li *ngFor="let page of ' '.repeat(pageDepartment.totalPages).split(''), let i = index " (click)="onSelect(i)" [class.active]="i === selectedPage"
-              class="page-item">
-              <a class="page-link" [routerLink]="">{{i}}</a>
-            </li>
-          </ul>
-        </nav> -->
-        <div class="has-text-centered">
-          <div class="spinner" [ngClass]="{ 'hidden': !loading }"></div>
-          <pagination-controls (pageChange)="onSelect($event)" id="server"></pagination-controls>
+
+        <!--Pagination-->
+        <div class="m-datatable__pager m-datatable--paging-loaded clearfix">
+          <div class="m-datatable__pager-info">
+            <!--<span class="m-datatable__pager-detail">Displaying 51 - 60 of 143 records</span>-->
+            <span class="m-datatable__pager-detail">Total Departments : {{pageDepartment?.totalElements}}</span>
+          </div>
+          <div class="has-text-centered">
+            <div class="spinner" [ngClass]="{ 'hidden': !loading }"></div>
+            <pagination-controls (pageChange)="onSelect($event)" id="server"></pagination-controls>
+          </div>
         </div>
-        <!--end: Datatable -->
+
 
       </div>
     </div>
