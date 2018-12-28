@@ -14,6 +14,8 @@ import { HttpClientModule } from "@angular/common/http";
 import { NgxPaginationModule } from "ngx-pagination";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,7 @@ import { ToastrModule } from 'ngx-toastr';
     EmployeesComponent,
     DepartmentsComponent,
     DesignationsComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
@@ -32,7 +35,8 @@ import { ToastrModule } from 'ngx-toastr';
     FormsModule,
     NgxPaginationModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    BsDropdownModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

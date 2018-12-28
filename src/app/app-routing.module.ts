@@ -4,10 +4,12 @@ import {DepartmentsComponent} from "./departments/departments.component";
 import {DesignationsComponent} from "./designations/designations.component";
 import {NotFoundComponent} from "./not-found/not-found.component";
 import {EmployeesComponent} from "./employees/employees.component";
+import {DashboardComponent} from "./dashboard/dashboard.component";
 
 
 const routes : Routes = [
-  {path : '',redirectTo : 'employees', pathMatch : 'full'},
+  {path : '',redirectTo : 'dashboard', pathMatch : 'full'},
+  {path : 'dashboard',component : DashboardComponent},
   {path : 'employees',component : EmployeesComponent},
   {path : 'departments',component : DepartmentsComponent},
   {path : 'designations',component : DesignationsComponent},
