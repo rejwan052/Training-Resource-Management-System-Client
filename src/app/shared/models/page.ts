@@ -1,8 +1,7 @@
-import { Department } from "./department";
 
-export class PageDepartment {
+export class Page {
 
-    content: Department[];
+    content: any[];
     totalPages: number;
     totalElements: number;
     last: boolean;

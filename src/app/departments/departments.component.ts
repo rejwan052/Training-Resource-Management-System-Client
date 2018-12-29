@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Department } from './department';
 import { ApiService } from '../shared/api.service';
 import { NgForm } from '@angular/forms';
-import { PageDepartment } from './page-department';
+import { Page } from '../shared/models/page';
 import { HttpParams } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 
@@ -13,10 +13,10 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class DepartmentsComponent implements OnInit {
 
-  pageDepartment: PageDepartment;
+  pageDepartment: Page;
   department: Department = new Department();
 
-  // For pagination
+  // For pagination & search
   selectedPage: number = 0;
   loading: boolean;
   searchTerm:string = '';
@@ -29,7 +29,6 @@ export class DepartmentsComponent implements OnInit {
   }
 
   submitDepartment(form: NgForm) {
-    console.log("Create Department ", this.department);
     if (this.department.id) {
       this.updateDepartment(form);
     } else {
@@ -43,6 +42,10 @@ export class DepartmentsComponent implements OnInit {
         console.log("Department create response ", res);
         this.department = new Department(res.id, res.name, res.description);
         this.pageDepartment.content.push(this.department);
+
+        if(this.pageDepartment.totalElements > 0)
+          this.pageDepartment.totalElements = this.pageDepartment.totalElements + 1;
+
         this.department = new Department();
         this.toastr.success('', 'Department create successfully.');
         form.resetForm();

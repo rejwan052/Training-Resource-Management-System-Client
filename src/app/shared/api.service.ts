@@ -3,7 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 import { Department } from '../departments/department';
-import { PageDepartment } from "../departments/page-department"
+import { Page } from "./models/page"
 
 @Injectable({
   providedIn: 'root'
@@ -15,13 +15,12 @@ export class ApiService {
   // Department URLs
   private ALL_DEPARTMENTS_URL = `${this.BASE_URL}/departments`;
   private CREATE_UPDATE_DEPARTMENT_URL = `${this.BASE_URL}/departments`;
-  private DEPARTMENTS_SEARCH_URL = `${this.BASE_URL}/departments/search`;
   private DEPARTMENT_URL = `${this.BASE_URL}/departments/`;
 
   constructor(private http: HttpClient) { }
 
-  getAllDepartments(params: HttpParams): Observable<PageDepartment> {
-    return this.http.get<PageDepartment>(this.ALL_DEPARTMENTS_URL, { params });
+  getAllDepartments(params: HttpParams): Observable<Page> {
+    return this.http.get<Page>(this.ALL_DEPARTMENTS_URL, { params });
   }
 
   createDepartment(department: Department): Observable<Department> {

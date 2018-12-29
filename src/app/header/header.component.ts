@@ -18,7 +18,7 @@ export class HeaderComponent implements OnInit {
       new NavItem(1,"Dashboard","/dashboard","flaticon-line-graph"),
       new NavItem(2,"Employees","/employees","flaticon-users"),
       new NavItem(3,"Departments","/departments","flaticon-squares-4"),
-      new NavItem(4,"Designations","/dashboard","flaticon-line-graph")
+      new NavItem(4,"Designations","/designations","flaticon-map")
     ];
     this.selectedNavItem = this.navItems[0];
     console.log("Nav items",this.navItems);

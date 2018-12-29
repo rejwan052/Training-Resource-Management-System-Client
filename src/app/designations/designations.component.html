@@ -4,30 +4,18 @@
   <div class="m-subheader ">
     <div class="d-flex align-items-center">
       <div class="mr-auto">
-        <h3 class="m-subheader__title m-subheader__title--separator">Designations</h3>
+        <h3 class="m-subheader__title m-subheader__title--separator">Departments</h3>
         <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
           <li class="m-nav__item m-nav__item--home">
-            <a routerLink="/designations" class="m-nav__link m-nav__link--icon">
-              <i class="m-nav__link-icon la flaticon-map"></i>
+            <a routerLink="/departments" class="m-nav__link m-nav__link--icon">
+              <i class="m-nav__link-icon flaticon-squares-4"></i>
             </a>
           </li>
-          <!-- <li class="m-nav__separator">-</li>
-          <li class="m-nav__item">
-            <a href="" class="m-nav__link">
-              <span class="m-nav__link-text">Resources</span>
-            </a>
-          </li>
-          <li class="m-nav__separator">-</li>
-          <li class="m-nav__item">
-            <a href="" class="m-nav__link">
-              <span class="m-nav__link-text">Timesheet</span>
-            </a>
-          </li> -->
         </ul>
       </div>
       <div>
         <div class="m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push" m-dropdown-toggle="hover"
-          aria-expanded="true">
+             aria-expanded="true">
           <a href="#" class="m-portlet__nav-link btn btn-lg btn-secondary  m-btn m-btn--outline-2x m-btn--air m-btn--icon m-btn--icon-only m-btn--pill  m-dropdown__toggle">
             <i class="la la-plus m--hide"></i>
             <i class="la la-ellipsis-h"></i>
@@ -82,5 +70,108 @@
 
   <!-- END: Subheader -->
   <div class="m-content">
-    Designations page content goes here </div>
+
+    <div class="row">
+      <div class="col-lg-12">
+
+        <!--begin::Portlet-->
+        <div class="m-portlet m-portlet--creative m-portlet--bordered-semi">
+          <div class="m-portlet__head">
+            <div class="m-portlet__head-caption">
+              <div class="m-portlet__head-title">
+                <h2 class="m-portlet__head-label m-portlet__head-label--primary">
+                  <span>Add Designation</span>
+                </h2>
+              </div>
+            </div>
+          </div>
+          <form class="m-form" name="form" #f="ngForm" (submit)="f.form.valid && submitDesignation(f);" novalidate>
+            <div class="m-portlet__body">
+              <div class="m-form__section m-form__section--first">
+                <div class="form-group m-form__group">
+                  <label for="name">Name *</label>
+                  <input type="text" id="name" class="form-control m-input" placeholder="Designation name" name="name" [(ngModel)]="designation.name" #name="ngModel"
+                         [ngClass]="{'is-invalid':f.submitted && name.invalid}" required />
+                  <div *ngIf="name.invalid && (name.dirty || name.touched)" class="invalid-input">
+                    <div *ngIf="name.errors?.required">Name is required</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="m-portlet__foot m-portlet__foot--fit">
+              <div class="m-form__actions m-form__actions--right">
+                <button type="submit" [disabled]="f.form.pristine || f.form.invalid" class="btn btn-brand">Submit</button>
+                <button type="reset" (click)="cancelForm(f)" class="btn btn-secondary ml-1">Cancel</button>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <!--end::Portlet-->
+      </div>
+    </div>
+
+    <div class="m-portlet m-portlet--mobile">
+      <div class="m-portlet__body">
+
+        <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
+          <div class="row align-items-center">
+            <div class="col-xl-8 order-2 order-xl-1">
+              <div class="form-group m-form__group row align-items-center">
+                <div class="col-md-6">
+                  <div class="m-input-icon m-input-icon--left">
+                    <input type="text" [(ngModel)]="searchTerm" (keyup)="searchDesignations()" class="form-control m-input" placeholder="Search designation by name..." id="generalSearch">
+                    <span class="m-input-icon__icon m-input-icon__icon--left">
+                      <span>
+                        <i class="la la-search"></i>
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <!--begin: Datatable -->
+        <table class="table table-striped- table-bordered table-hover table-checkable" id="departments_table">
+          <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th class="text-center">Actions</th>
+          </tr>
+          </thead>
+          <tbody *ngIf="designationPage?.content">
+          <tr *ngFor="let designation of designationPage.content | paginate: { id: 'server', itemsPerPage: 10, currentPage: selectedPage, totalItems: designationPage.totalElements }">
+            <td>{{designation.id}}</td>
+            <td>{{designation.name}}</td>
+            <td class="text-center">
+              <a (click)="getDesignation(designation.id)" class="m-portlet__nav-link btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill"
+                 title="Edit">
+                <i class="la la-edit"></i>
+              </a>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+
+        <!--Pagination-->
+        <div class="m-datatable__pager m-datatable--paging-loaded clearfix">
+          <div class="m-datatable__pager-info">
+            <!--<span class="m-datatable__pager-detail">Displaying 51 - 60 of 143 records</span>-->
+            <span class="m-datatable__pager-detail">Total Designations : {{designationPage?.totalElements}}</span>
+          </div>
+          <div class="has-text-centered">
+            <div class="spinner" [ngClass]="{ 'hidden': !loading }"></div>
+            <pagination-controls (pageChange)="onSelect($event)" id="server"></pagination-controls>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
 </div>
