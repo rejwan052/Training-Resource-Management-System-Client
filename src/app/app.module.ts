@@ -16,6 +16,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import {NgSelectizeModule} from 'ng-selectize';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     NgxPaginationModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    BsDropdownModule.forRoot()
+    BsDropdownModule.forRoot(),
+    NgSelectizeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

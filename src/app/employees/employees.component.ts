@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component,OnInit} from '@angular/core';
+import {ApiService} from "../shared/api.service";
+import {DesignationService} from "../designations/designation.service";
+import {ToastrService} from "ngx-toastr";
+import {HttpParams} from "@angular/common/http";
 
 @Component({
   selector: 'app-employees',
@@ -7,9 +11,53 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EmployeesComponent implements OnInit {
 
-  constructor() { }
+  constructor(private apiService : ApiService,private designationService : DesignationService,private toastr: ToastrService) { }
 
   ngOnInit() {
   }
+
+
+  designationConfig: any =  {
+    labelField: 'name',
+    valueField: 'id',
+    searchField: ['name'],
+    create: false,
+    preload:true,
+    load: ((query, callback) => {
+      const params = new HttpParams().set('name', query);
+      this.designationService.getAllDesignations(params).subscribe(
+        res => {
+          callback(res.content);
+        },
+        err => {
+          callback()
+          console.log("Error occurred while get all designations;")
+        }
+      );
+    }).bind(this)
+  };
+
+  departmentConfig: any =  {
+    labelField: 'name',
+    valueField: 'id',
+    searchField: ['name'],
+    create: false,
+    preload:true,
+    load: ((query, callback) => {
+      const params = new HttpParams().set('name', query);
+      this.apiService.getAllDepartments(params).subscribe(
+          res => {
+            callback(res.content);
+          },
+          err => {
+            callback()
+            console.log("Error occurred while get all departments;")
+          }
+        );
+    }).bind(this)
+  };
+
+
+
 
 }

@@ -29,7 +29,8 @@
               "./node_modules/owl.carousel/dist/assets/owl.carousel.min.css",
               "./node_modules/owl.carousel/dist/assets/owl.theme.default.min.css",
               "src/styles.css",
-              "./node_modules/ngx-toastr/toastr.css"
+              "./node_modules/ngx-toastr/toastr.css",
+              "./node_modules/ng-selectize/selectize/selectize.css"
             ],
             "scripts": [
               "./node_modules/jquery/dist/jquery.min.js",
@@ -39,7 +40,8 @@
               "./node_modules/moment/min/moment.min.js",
               "./node_modules/tooltip.js/dist/umd/tooltip.min.js",
               "./node_modules/perfect-scrollbar/dist/perfect-scrollbar.js",
-              "src/assets/js/scripts.bundle.js"
+              "src/assets/js/scripts.bundle.js",
+              "./node_modules/ng-selectize/selectize/selectize.standalone.js"
             ]
           },
           "configurations": {

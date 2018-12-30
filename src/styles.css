@@ -71,5 +71,9 @@
   border-radius: 100%;
 }
 
+/*selectize custom css*/
+.selectize-dropdown{
+  margin: 36px 0 0 0 !important;
+}
 
 
