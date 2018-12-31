@@ -1,8 +1,9 @@
-import {Component,OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ApiService} from "../shared/api.service";
 import {DesignationService} from "../designations/designation.service";
 import {ToastrService} from "ngx-toastr";
 import {HttpParams} from "@angular/common/http";
+import {delay} from "rxjs/operators";
 
 @Component({
   selector: 'app-employees',
@@ -25,7 +26,7 @@ export class EmployeesComponent implements OnInit {
     preload:true,
     load: ((query, callback) => {
       const params = new HttpParams().set('name', query);
-      this.designationService.getAllDesignations(params).subscribe(
+      this.designationService.getAllDesignations(params).pipe(delay(500)).subscribe(
         res => {
           callback(res.content);
         },
@@ -45,7 +46,7 @@ export class EmployeesComponent implements OnInit {
     preload:true,
     load: ((query, callback) => {
       const params = new HttpParams().set('name', query);
-      this.apiService.getAllDepartments(params).subscribe(
+      this.apiService.getAllDepartments(params).pipe(delay(500)).subscribe(
           res => {
             callback(res.content);
           },

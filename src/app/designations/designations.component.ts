@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Page} from "../shared/models/page";
 import {Designation} from "./designation";
 import {DesignationService} from "./designation.service";
 import {ToastrService} from "ngx-toastr";
 import {HttpParams} from "@angular/common/http";
 import {NgForm} from "@angular/forms";
+import {delay} from "rxjs/operators";
 
 @Component({
   selector: 'app-designations',
@@ -79,7 +80,7 @@ export class DesignationsComponent implements OnInit {
 
   getAllDesignations(params: HttpParams): void {
     this.loading = true;
-    this.designationService.getAllDesignations(params).subscribe(
+    this.designationService.getAllDesignations(params).pipe(delay(500)).subscribe(
       res => {
         this.designationPage = res;
         this.loading = false;

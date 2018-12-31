@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {environment} from "../../environments/environment";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
@@ -14,7 +14,7 @@ export class DesignationService {
 
   // Department URLs
   private ALL_DESIGNATIONS_URL = `${this.BASE_URL}/designations`;
-  private CREATE_UPDATE_DESIGNATION_URL = `${this.BASE_URL}/designations`;
+  private DESIGNATION_CREATE_URL = `${this.BASE_URL}/designations`;
   private DESIGNATION_URL = `${this.BASE_URL}/designations/`;
 
   constructor(private http: HttpClient) { }
@@ -24,7 +24,7 @@ export class DesignationService {
   }
 
   createDesignation(designation: Designation): Observable<Designation> {
-    return this.http.post<Designation>(this.CREATE_UPDATE_DESIGNATION_URL, designation);
+    return this.http.post<Designation>(this.DESIGNATION_CREATE_URL, designation);
   }
 
   getDesignationByDesignationId(designationId: number): Observable<Designation> {

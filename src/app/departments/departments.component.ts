@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { Department } from './department';
-import { ApiService } from '../shared/api.service';
-import { NgForm } from '@angular/forms';
-import { Page } from '../shared/models/page';
-import { HttpParams } from '@angular/common/http';
-import { ToastrService } from 'ngx-toastr';
+import {Component, OnInit} from '@angular/core';
+import {Department} from './department';
+import {ApiService} from '../shared/api.service';
+import {NgForm} from '@angular/forms';
+import {Page} from '../shared/models/page';
+import {HttpParams} from '@angular/common/http';
+import {ToastrService} from 'ngx-toastr';
+import {delay} from "rxjs/operators";
 
 @Component({
   selector: 'app-departments',
@@ -78,7 +79,7 @@ export class DepartmentsComponent implements OnInit {
 
   getAllDepartments(params: HttpParams): void {
     this.loading = true;
-    this.apiService.getAllDepartments(params).subscribe(
+    this.apiService.getAllDepartments(params).pipe(delay(500)).subscribe(
       res => {
         this.pageDepartment = res;
         this.loading = false;
