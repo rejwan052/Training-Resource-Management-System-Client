@@ -21,6 +21,16 @@ export class EmployeesComponent implements OnInit {
 
   designationNotFocused = false;
   departmentNotFocused = false;
+
+  constructor(private employeeService: EmployeeService,
+              private apiService: ApiService,
+              private designationService: DesignationService,
+              private toastr: ToastrService) {
+
+  }
+
+  ngOnInit() {}
+
   designationConfig: any =  {
     labelField: 'name',
     valueField: 'id',
@@ -41,8 +51,6 @@ export class EmployeesComponent implements OnInit {
     }).bind(this)
   };
 
-  ngOnInit() {
-  }
   departmentConfig: any =  {
     labelField: 'name',
     valueField: 'id',
@@ -63,11 +71,7 @@ export class EmployeesComponent implements OnInit {
     }).bind(this)
   };
 
-  constructor(private employeeService: EmployeeService,
-              private apiService: ApiService,
-              private designationService: DesignationService,
-              private toastr: ToastrService) {
-  }
+
 
   submitEmployee(form: NgForm): void {
     if (this.employee.id) {
@@ -78,6 +82,7 @@ export class EmployeesComponent implements OnInit {
   }
 
   createEmployee(form: NgForm): void {
+    this.employee.address = this.employeeAddress;
     this.employeeService.createEmployee(this.employee).subscribe(
       res => {
         //this.employee = res;
@@ -108,8 +113,6 @@ export class EmployeesComponent implements OnInit {
       }
     );
   }
-
-
 
 
 }
