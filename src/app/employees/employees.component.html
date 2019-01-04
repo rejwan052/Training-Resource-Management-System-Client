@@ -110,18 +110,18 @@
 													</span>
                 </a>
                 <div class="btn-group">
-                  <button type="button" [disabled]="f.form.pristine || f.form.invalid" (click)="submitEmployee(f);"
+                  <button type="button" [disabled]="f.form.pristine || f.form.invalid" (click)="submitEmployee(f)"
                           class="btn btn-brand  m-btn m-btn--icon m-btn--wide m-btn--md">
 														<span>
-															<i class="la la-check"></i>
+															<i class="flaticon-plus"></i>
 															<span>Save</span>
 														</span>
                   </button>
                   <button type="button" class="btn btn-brand  dropdown-toggle dropdown-toggle-split m-btn m-btn--md" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   </button>
                   <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="#"><i class="la la-plus"></i> Save</a>
-                    <a class="dropdown-item" href="#"><i class="la la-close"></i> Cancel</a>
+                    <a class="btn dropdown-item" [class.disabled]="f.form.pristine || f.form.invalid" (click)="submitEmployee(f)"><i class="flaticon-plus"></i> Save</a>
+                    <a class="btn dropdown-item" (click)="resetEmployeeForm(f)"><i class="flaticon-close"></i> Cancel</a>
                   </div>
                 </div>
               </div>

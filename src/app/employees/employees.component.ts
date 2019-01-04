@@ -87,9 +87,7 @@ export class EmployeesComponent implements OnInit {
       res => {
         //this.employee = res;
         this.toastr.success('', 'Employee create successfully.');
-        form.resetForm();
-        this.designationNotFocused = false;
-        this.departmentNotFocused = false;
+        this.resetEmployeeForm(form);
       },
       err => {
         console.log("Employee create error ", err);
@@ -103,15 +101,19 @@ export class EmployeesComponent implements OnInit {
       res => {
         console.log("Update employee response ", res);
         this.toastr.success('', 'Employee update successfully.');
-        form.resetForm();
-        this.designationNotFocused = false;
-        this.departmentNotFocused = false;
+        this.resetEmployeeForm(form);
       },
       err => {
         console.log("Employee update error ", err);
         this.toastr.error('', err.error.apierror.debugMessage);
       }
     );
+  }
+
+  resetEmployeeForm(form: NgForm):void{
+    form.resetForm();
+    this.designationNotFocused = false;
+    this.departmentNotFocused = false;
   }
 
 

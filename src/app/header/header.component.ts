@@ -18,7 +18,12 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     this.getNavigationItems();
     console.log("Location path:", this.location.path());
-    this.selectedNavItem = this.navItems.find(navItem => navItem.url === this.location.path());
+    if(this.location.path()){
+      this.selectedNavItem = this.navItems.find(navItem => navItem.url === this.location.path());
+    }else{
+      this.selectedNavItem = this.navItems[0];
+    }
+
   }
   onSelect(event): void {
     const selectedText = event.target.innerText;
@@ -27,7 +32,6 @@ export class HeaderComponent implements OnInit {
 
   getNavigationItems(): NavItem[] {
     this.navItems = [
-      new NavItem(1, "Dashboard", "", "flaticon-line-graph"),
       new NavItem(2, "Dashboard", "/dashboard", "flaticon-line-graph"),
       new NavItem(3, "Employees", "/employees", "flaticon-users"),
       new NavItem(4, "Departments", "/departments", "flaticon-squares-4"),
