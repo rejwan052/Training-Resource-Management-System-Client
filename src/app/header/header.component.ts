@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NavItem} from "./nav-item";
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-header',
@@ -11,22 +12,28 @@ export class HeaderComponent implements OnInit {
   navItems : NavItem[];
   selectedNavItem : NavItem;
 
-  constructor() { }
+  constructor(private location: Location) {
+  }
 
   ngOnInit() {
-    this.navItems = [
-      new NavItem(1,"Dashboard","/dashboard","flaticon-line-graph"),
-      new NavItem(2,"Employees","/employees","flaticon-users"),
-      new NavItem(3,"Departments","/departments","flaticon-squares-4"),
-      new NavItem(4,"Designations","/designations","flaticon-map")
-    ];
-    this.selectedNavItem = this.navItems[0];
-    console.log("Nav items",this.navItems);
+    this.getNavigationItems();
+    console.log("Location path:", this.location.path());
+    this.selectedNavItem = this.navItems.find(navItem => navItem.url === this.location.path());
   }
   onSelect(event): void {
     const selectedText = event.target.innerText;
     this.selectedNavItem = this.navItems.find(navItem => navItem.name === selectedText);
-    // console.log("Dropdown selected nav item",this.selectedNavItem);
+  }
+
+  getNavigationItems(): NavItem[] {
+    this.navItems = [
+      new NavItem(1, "Dashboard", "", "flaticon-line-graph"),
+      new NavItem(2, "Dashboard", "/dashboard", "flaticon-line-graph"),
+      new NavItem(3, "Employees", "/employees", "flaticon-users"),
+      new NavItem(4, "Departments", "/departments", "flaticon-squares-4"),
+      new NavItem(5, "Designations", "/designations", "flaticon-map")
+    ];
+    return this.navItems;
   }
 
 }

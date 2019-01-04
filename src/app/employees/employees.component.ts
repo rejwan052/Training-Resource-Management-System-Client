@@ -4,6 +4,10 @@ import {DesignationService} from "../designations/designation.service";
 import {ToastrService} from "ngx-toastr";
 import {HttpParams} from "@angular/common/http";
 import {delay} from "rxjs/operators";
+import {NgForm} from "@angular/forms";
+import {Employee} from "./employee";
+import {Address} from "../shared/models/address";
+import {EmployeeService} from "./employee.service";
 
 @Component({
   selector: 'app-employees',
@@ -12,12 +16,11 @@ import {delay} from "rxjs/operators";
 })
 export class EmployeesComponent implements OnInit {
 
-  constructor(private apiService : ApiService,private designationService : DesignationService,private toastr: ToastrService) { }
+  employee: Employee = new Employee();
+  employeeAddress: Address = new Address();
 
-  ngOnInit() {
-  }
-
-
+  designationNotFocused = false;
+  departmentNotFocused = false;
   designationConfig: any =  {
     labelField: 'name',
     valueField: 'id',
@@ -31,13 +34,15 @@ export class EmployeesComponent implements OnInit {
           callback(res.content);
         },
         err => {
-          callback()
+          callback();
           console.log("Error occurred while get all designations;")
         }
       );
     }).bind(this)
   };
 
+  ngOnInit() {
+  }
   departmentConfig: any =  {
     labelField: 'name',
     valueField: 'id',
@@ -51,12 +56,58 @@ export class EmployeesComponent implements OnInit {
             callback(res.content);
           },
           err => {
-            callback()
+            callback();
             console.log("Error occurred while get all departments;")
           }
         );
     }).bind(this)
   };
+
+  constructor(private employeeService: EmployeeService,
+              private apiService: ApiService,
+              private designationService: DesignationService,
+              private toastr: ToastrService) {
+  }
+
+  submitEmployee(form: NgForm): void {
+    if (this.employee.id) {
+      this.updateEmployee(form);
+    } else {
+      this.createEmployee(form);
+    }
+  }
+
+  createEmployee(form: NgForm): void {
+    this.employeeService.createEmployee(this.employee).subscribe(
+      res => {
+        //this.employee = res;
+        this.toastr.success('', 'Employee create successfully.');
+        form.resetForm();
+        this.designationNotFocused = false;
+        this.departmentNotFocused = false;
+      },
+      err => {
+        console.log("Employee create error ", err);
+        this.toastr.error('', err.error.apierror.debugMessage);
+      }
+    );
+  }
+
+  updateEmployee(form: NgForm): void {
+    this.employeeService.updateEmployee(this.employee).subscribe(
+      res => {
+        console.log("Update employee response ", res);
+        this.toastr.success('', 'Employee update successfully.');
+        form.resetForm();
+        this.designationNotFocused = false;
+        this.departmentNotFocused = false;
+      },
+      err => {
+        console.log("Employee update error ", err);
+        this.toastr.error('', err.error.apierror.debugMessage);
+      }
+    );
+  }
 
 
 

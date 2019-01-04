@@ -97,4 +97,8 @@
   opacity: 0.4;
 }
 
+.selectize-input input {
+  width: 100% !important;
+}
+
 
