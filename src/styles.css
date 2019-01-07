@@ -22,6 +22,9 @@
 
 /* begin::Global Theme Styles */
 @import './assets/css/style.bundle.min.css';
+@import '~@swimlane/ngx-datatable/release/index.css';
+@import '~@swimlane/ngx-datatable/release/themes/material.css';
+@import '~@swimlane/ngx-datatable/release/assets/icons.css';
 /* end::Global Theme Styles */
 
 .invalid-input{

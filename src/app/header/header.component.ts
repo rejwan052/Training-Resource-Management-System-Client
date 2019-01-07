@@ -33,7 +33,8 @@ export class HeaderComponent implements OnInit {
   getNavigationItems(): NavItem[] {
     this.navItems = [
       new NavItem(2, "Dashboard", "/dashboard", "flaticon-line-graph"),
-      new NavItem(3, "Employees", "/employees", "flaticon-users"),
+      new NavItem(2, "Create Employee", "/employee", "flaticon-plus"),
+      new NavItem(3, "Employee List", "/employees", "flaticon-users"),
       new NavItem(4, "Departments", "/departments", "flaticon-squares-4"),
       new NavItem(5, "Designations", "/designations", "flaticon-map")
     ];
