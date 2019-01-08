@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {Page} from "../shared/models/page";
 import {EmployeeService} from "../employees/employee.service";
 import {ToastrService} from "ngx-toastr";
@@ -12,17 +12,11 @@ import {delay} from "rxjs/operators";
 })
 export class EmployeeComponent implements OnInit {
 
+  @ViewChild('fullName') fullName:TemplateRef<any>;
   page:Page = new Page();
   isLoading: boolean;
+  tableColumns = [];
 
-  tableColumns = [
-    { name: 'Name', prop: 'firstName'},
-    { name: 'Email', prop: 'email'},
-    { name: 'Gender', prop: 'gender'},
-    { name: 'Date of Birth', prop: 'dateOfBirth'},
-    { name: 'Designation', prop: 'designation.name'},
-    { name: 'Department', prop: 'department.name'},
-  ]
 
   constructor(private employeeService: EmployeeService,private toastr: ToastrService) {
     this.page.pageable.pageNumber = 0;
@@ -30,6 +24,14 @@ export class EmployeeComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.tableColumns = [
+      { name: 'Name', cellTemplate: this.fullName},
+      { name: 'Email', prop: 'email'},
+      { name: 'Gender', prop: 'gender'},
+      { name: 'Date of Birth', prop: 'dateOfBirth'},
+      { name: 'Designation', prop: 'designation.name'},
+      { name: 'Department', prop: 'department.name'},
+    ];
     this.setPage({ offset: 0 });
   }
 

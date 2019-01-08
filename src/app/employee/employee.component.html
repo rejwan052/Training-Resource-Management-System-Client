@@ -103,7 +103,7 @@
           </div>
           <div class="m-portlet__body">
             <ngx-datatable
-              class="material"
+              class="material striped"
               [rows]="page.content"
               [columns]="tableColumns"
               [columnMode]="'force'"
@@ -117,6 +117,11 @@
               [offset]="page.pageable.pageNumber"
               (page)='setPage($event)'>
             </ngx-datatable>
+
+            <ng-template #fullName let-row="row" ngx-datatable-cell-template>
+              {{row.firstName}} {{row.lastName}}
+            </ng-template>
+
           </div>
         </div>
       </div>
