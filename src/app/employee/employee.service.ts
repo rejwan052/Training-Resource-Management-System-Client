@@ -36,4 +36,8 @@ export class EmployeeService {
     return this.http.put<Employee>(this.EMPLOYEE_URL + updateEmployee.id, updateEmployee);
   }
 
+  deleteEmployee(employeeId:number):Observable<Employee>{
+    return this.http.delete<Employee>(this.EMPLOYEE_URL+employeeId);
+  }
+
 }

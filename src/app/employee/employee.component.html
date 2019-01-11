@@ -67,64 +67,288 @@
       </div>
     </div>
   </div>
-
   <!-- END: Subheader -->
+
   <div class="m-content">
     <div class="row">
       <div class="col-lg-12">
-        <div class="m-portlet m-portlet--creative m-portlet--bordered-semi">
-          <div class="m-portlet__head">
-            <div class="m-portlet__head-caption">
-              <div class="m-portlet__head-title">
-												<span class="m-portlet__head-icon">
-													<i class="flaticon-users"></i>
-												</span>
-                <h3 class="m-portlet__head-text">
-                  Portlet sub title goes here
-                </h3>
-                <h2 class="m-portlet__head-label m-portlet__head-label--primary">
-                  <span>Employee List</span>
-                </h2>
+        <!--begin::Portlet-->
+        <div class="m-portlet m-portlet--last m-portlet--head-lg m-portlet--responsive-mobile" id="main_portlet">
+          <div class="m-portlet__head" style="">
+            <div class="m-portlet__head-progress">
+
+              <!-- here can place a progress bar-->
+            </div>
+            <div class="m-portlet__head-wrapper">
+              <div class="m-portlet__head-caption">
+                <div class="m-portlet__head-title">
+													<span class="m-portlet__head-icon">
+														<i class="flaticon-user"></i>
+													</span>
+                  <h3 class="m-portlet__head-text">
+                    Add Employee
+                  </h3>
+                </div>
+              </div>
+              <div class="m-portlet__head-tools">
+                <a routerLink="/employees" class="btn btn-secondary m-btn m-btn--icon m-btn--wide m-btn--md m--margin-right-10">
+													<span>
+														<i class="la la-arrow-left"></i>
+														<span>Back To Employee List</span>
+													</span>
+                </a>
+                <div class="btn-group">
+                  <button type="button" [disabled]="f.form.pristine || f.form.invalid" (click)="submitEmployee(f)"
+                          class="btn btn-brand  m-btn m-btn--icon m-btn--wide m-btn--md">
+														<span>
+															<i class="flaticon-plus"></i>
+															<span>Save</span>
+														</span>
+                  </button>
+                  <button type="button" class="btn btn-brand  dropdown-toggle dropdown-toggle-split m-btn m-btn--md" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  </button>
+                  <div class="dropdown-menu dropdown-menu-right">
+                    <a class="btn dropdown-item" [class.disabled]="f.form.pristine || f.form.invalid" (click)="submitEmployee(f)"><i class="flaticon-plus"></i> Save</a>
+                    <a class="btn dropdown-item" (click)="resetEmployeeForm(f)"><i class="flaticon-close"></i> Cancel</a>
+                  </div>
+                </div>
               </div>
             </div>
-            <div class="m-portlet__head-tools">
-              <ul class="m-portlet__nav">
-                <!--<li class="m-portlet__nav-item">
-                  <a href="" class="m-portlet__nav-link m-portlet__nav-link&#45;&#45;icon"><i class="la la-close"></i></a>
-                </li>-->
-                <li class="m-portlet__nav-item">
-                  <a href="" class="m-portlet__nav-link m-portlet__nav-link--icon"><i class="la la-refresh"></i></a>
-                </li>
-                <!--<li class="m-portlet__nav-item">
-                  <a href="" class="m-portlet__nav-link m-portlet__nav-link&#45;&#45;icon"><i class="la la-circle"></i></a>
-                </li>-->
-              </ul>
+          </div>
+          <!--<form class="m-form m-form&#45;&#45;label-align-left- m-form&#45;&#45;state-" name="form" #f="ngForm" (submit)="f.form.valid && submitEmployee(f);" novalidate>-->
+          <form class="m-form m-form--label-align-left- m-form--state-" name="form" #f="ngForm" novalidate>
+            <div class="m-portlet__body">
+              <!--begin: Form Body -->
+              <div class="m-portlet__body">
+                <div class="row">
+                  <div class="col-xl-8 offset-xl-2">
+                    <div class="m-form__section m-form__section--first">
+                      <div class="m-form__heading">
+                        <h3 class="m-form__heading-title">Employee Details</h3>
+                      </div>
+                      <div class="form-group m-form__group row">
+                        <label class="col-xl-3 col-lg-3 col-form-label">First Name: *</label>
+                        <div class="col-xl-9 col-lg-9">
+                          <input type="text"
+                                 name="firstName"
+                                 class="form-control m-input"
+                                 placeholder="Enter first name"
+                                 [(ngModel)]="employee.firstName" #firstName="ngModel"
+                                 [ngClass]="{'is-invalid':f.submitted && firstName.invalid}" required>
+                          <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)">
+                            <span *ngIf="firstName.errors?.required" class="m-form__help invalid-input">Please enter your first name</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group m-form__group row">
+                        <label class="col-xl-3 col-lg-3 col-form-label">Last Name: * </label>
+                        <div class="col-xl-9 col-lg-9">
+                          <input type="text"
+                                 name="lastName"
+                                 class="form-control m-input"
+                                 placeholder="Enter last name"
+                                 [(ngModel)]="employee.lastName" #lastName="ngModel"
+                                 [ngClass]="{'is-invalid':f.submitted && lastName.invalid}" required>
+                          <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)">
+                            <span *ngIf="lastName.errors?.required" class="m-form__help invalid-input">Please enter your last name</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group m-form__group row">
+                        <label class="col-xl-3 col-lg-3 col-form-label">Email: * </label>
+                        <div class="col-xl-9 col-lg-9">
+                          <input type="text"
+                                 name="email"
+                                 class="form-control m-input"
+                                 placeholder="Enter email"
+                                 [(ngModel)]="employee.email" #email="ngModel"
+                                 [ngClass]="{'is-invalid':f.submitted && email.invalid}" required email>
+                          <div *ngIf="email.invalid && (email.dirty || email.touched)">
+                            <span *ngIf="email.errors?.required" class="m-form__help invalid-input">Please enter your email address</span>
+                            <div class="m-form__help invalid-input" *ngIf="email.errors?.email">Email must be a valid
+                              email address
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="form-group m-form__group row">
+                        <div class="col-lg-6 m-form__group-sub">
+                          <label class="form-control-label">Gender: *</label>
+                          <div class="m-radio-inline">
+                            <label class="m-radio m-radio--solid m-radio--brand">
+                              <input type="radio" name="gender" value="MALE" [(ngModel)]="employee.gender"
+                                     #gender="ngModel" required> Male
+                              <span></span>
+                            </label>
+                            <label class="m-radio m-radio--solid m-radio--brand">
+                              <input type="radio" name="gender" value="FEMALE" [(ngModel)]="employee.gender"
+                                     #gender="ngModel" required> Female
+                              <span></span>
+                            </label>
+                          </div>
+                          <div *ngIf="gender.invalid && (gender.dirty || gender.touched)">
+                            <span *ngIf="gender.errors?.required" class="m-form__help invalid-input">Please select gender</span>
+                          </div>
+                        </div>
+                        <div class="col-lg-6 m-form__group-sub">
+                          <label class="form-control-label">Date of Birth:</label>
+                          <div class="input-group date">
+                            <input type="text"
+                                   placeholder="Date of birth"
+                                   class="form-control"
+                                   name="dateOfBirth"
+                                   #dp="bsDatepicker"
+                                   [(ngModel)]="employee.dateOfBirth"
+                                   bsDatepicker
+                                   [bsValue]="employee.dateOfBirth">
+                          </div>
+                          <!--<span class="m-form__help">Please select date of birth</span>-->
+                        </div>
+                      </div>
+
+                      <!--<div class="form-group m-form__group row">-->
+                      <!--<label class="col-xl-3 col-lg-3 col-form-label">* Phone</label>-->
+                      <!--<div class="col-xl-9 col-lg-9">-->
+                      <!--<div class="input-group">-->
+                      <!--<div class="input-group-prepend"><span class="input-group-text"><i class="la la-phone"></i></span></div>-->
+                      <!--<input type="text" name="phone" class="form-control m-input" placeholder="" value="1-541-754-3010">-->
+                      <!--</div>-->
+                      <!--<span class="m-form__help">Enter your valid phone in US phone format. E.g: 1-541-754-3010</span>-->
+                      <!--</div>-->
+                      <!--</div>-->
+                    </div>
+
+                    <div class="m-separator m-separator--dashed m-separator--lg"></div>
+                    <div class="m-form__section">
+                      <div class="m-form__heading">
+                        <h3 class="m-form__heading-title">
+                          Designation & Department Details
+                          <!--<i data-toggle="m-tooltip" data-width="auto" class="m-form__heading-help-icon flaticon-info" title="" data-original-title="Some help text goes here"></i>-->
+                        </h3>
+                      </div>
+                      <div class="form-group m-form__group row">
+                        <div class="col-lg-6 m-form__group-sub">
+                          <label class="col-xl-5 col-lg-5 col-form-label">Designation: *</label>
+                          <div class="">
+                            <ng-selectize [errorClass]="'invalid-input'"
+                                          [config]="designationConfig"
+                                          (focus)="designationNotFocused = false"
+                                          (focusout)="designationNotFocused = true"
+                                          name="designation"
+                                          placeholder="Select designation"
+                                          [(ngModel)]="employee.designationId"
+                                          #designationId="ngModel"
+                                          required="true">
+
+                            </ng-selectize>
+                            <div *ngIf="designationId.touched || designationNotFocused">
+                              <span *ngIf="designationId.hasError('required')" class="m-form__help invalid-input">Designation is required</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-lg-6 m-form__group-sub">
+                          <label class="col-xl-5 col-lg-5 col-form-label">Department: *</label>
+                          <div class="">
+                            <ng-selectize [errorClass]="'invalid-input'"
+                                          [config]="departmentConfig"
+                                          (focus)="departmentNotFocused = false"
+                                          (focusout)="departmentNotFocused = true"
+                                          name="department"
+                                          placeholder="Select department"
+                                          [(ngModel)]="employee.departmentId"
+                                          #departmentId="ngModel"
+                                          required="true">
+
+                            </ng-selectize>
+                            <div *ngIf="departmentId.touched || departmentNotFocused">
+                              <span *ngIf="departmentId.hasError('required')" class="m-form__help invalid-input">Department is required</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="m-separator m-separator--dashed m-separator--lg"></div>
+                    <div class="m-form__section">
+                      <div class="m-form__heading">
+                        <h3 class="m-form__heading-title">
+                          Present Address
+                          <!--<i data-toggle="m-tooltip" data-width="auto" class="m-form__heading-help-icon flaticon-info" title="" data-original-title="Some help text goes here"></i>-->
+                        </h3>
+                      </div>
+                      <div class="form-group m-form__group row">
+                        <label class="col-xl-3 col-lg-3 col-form-label">Address Line 1:</label>
+                        <div class="col-xl-9 col-lg-9">
+                          <input type="text"
+                                 name="addressLine1"
+                                 class="form-control m-input"
+                                 placeholder="Street address, P.O. box, company name, c/o"
+                                 [(ngModel)]="employeeAddress.addressLine1" #addressLine1="ngModel">
+                          <span class="m-form__help">Street address, P.O. box, company name, c/o</span>
+                        </div>
+                      </div>
+                      <div class="form-group m-form__group row">
+                        <label class="col-xl-3 col-lg-3 col-form-label">Address Line 2:</label>
+                        <div class="col-xl-9 col-lg-9">
+                          <input type="text"
+                                 name="addressLine2"
+                                 class="form-control m-input"
+                                 placeholder="Appartment, suite, unit, building, floor, etc"
+                                 [(ngModel)]="employeeAddress.addressLine2" #addressLine2="ngModel">
+                          <span class="m-form__help">Appartment, suite, unit, building, floor, etc</span>
+                        </div>
+                      </div>
+                      <div class="form-group m-form__group row">
+                        <label class="col-xl-3 col-lg-3 col-form-label">City/District:</label>
+                        <div class="col-xl-9 col-lg-9">
+                          <input type="text"
+                                 name="city"
+                                 class="form-control m-input"
+                                 placeholder="Enter city/district"
+                                 [(ngModel)]="employeeAddress.city" #city="ngModel">
+                        </div>
+                      </div>
+                      <div class="form-group m-form__group row">
+                        <label class="col-xl-3 col-lg-3 col-form-label">Town/Village:</label>
+                        <div class="col-xl-9 col-lg-9">
+                          <input type="text"
+                                 name="town"
+                                 class="form-control m-input"
+                                 placeholder="Enter town/vollage"
+                                 [(ngModel)]="employeeAddress.town" #town="ngModel">
+                        </div>
+                      </div>
+                    </div>
+
+                    <!--<div class="m-separator m-separator&#45;&#45;dashed m-separator&#45;&#45;lg"></div>
+                    <div class="m-form__section m-form__section&#45;&#45;first">
+                      <div class="m-form__heading">
+                        <h3 class="m-form__heading-title">Account Details</h3>
+                      </div>
+                      <div class="form-group m-form__group row">
+                        <div class="col-lg-6 m-form__group-sub">
+                          <label class="form-control-label">Username: *</label>
+                          <input type="text" name="account_username" class="form-control m-input" placeholder="">
+                          <span class="m-form__help">Your username to login to your dashboard</span>
+                        </div>
+                        <div class="col-lg-6 m-form__group-sub">
+                          <label class="form-control-label">Password: *</label>
+                          <input type="password" name="account_password" class="form-control m-input" placeholder="">
+                          <span class="m-form__help">Please use letters and at least one number and symbol</span>
+                        </div>
+                      </div>
+                    </div>-->
+
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-          <div class="m-portlet__body">
-            <ngx-datatable
-              class="material striped"
-              [rows]="page.content"
-              [columns]="tableColumns"
-              [columnMode]="'force'"
-              [headerHeight]="50"
-              [footerHeight]="50"
-              [rowHeight]="'auto'"
-              [rowHeight]="50"
-              [loadingIndicator]="isLoading"
-              [externalPaging]="true"
-              [count]="page.totalElements"
-              [offset]="page.pageable.pageNumber"
-              (page)='setPage($event)'>
-            </ngx-datatable>
-
-            <ng-template #fullName let-row="row" ngx-datatable-cell-template>
-              {{row.firstName}} {{row.lastName}}
-            </ng-template>
-
-          </div>
+          </form>
         </div>
+        <!--end::Portlet-->
       </div>
     </div>
   </div>
+
 </div>

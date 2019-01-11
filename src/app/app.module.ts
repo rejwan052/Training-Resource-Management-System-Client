@@ -20,6 +20,8 @@ import {NgSelectizeModule} from 'ng-selectize';
 import {FooterComponent} from './footer/footer.component';
 import {NgxDatatableModule} from '@swimlane/ngx-datatable';
 import {EmployeeComponent} from './employee/employee.component';
+import {ConfirmationDialogComponent} from './shared/confirmation-dialog/confirmation-dialog.component';
+import {ModalModule} from "ngx-bootstrap";
 
 @NgModule({
   declarations: [
@@ -31,7 +33,8 @@ import {EmployeeComponent} from './employee/employee.component';
     DesignationsComponent,
     DashboardComponent,
     FooterComponent,
-    EmployeeComponent
+    EmployeeComponent,
+    ConfirmationDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,8 +47,10 @@ import {EmployeeComponent} from './employee/employee.component';
     ToastrModule.forRoot(),
     BsDropdownModule.forRoot(),
     NgSelectizeModule,
-    NgxDatatableModule
+    NgxDatatableModule,
+    ModalModule.forRoot()
   ],
+  entryComponents:[ConfirmationDialogComponent],
   providers: [],
   bootstrap: [AppComponent]
 })
