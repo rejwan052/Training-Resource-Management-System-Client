@@ -4,6 +4,7 @@ import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Page} from "../shared/models/page";
 import {Designation} from "./designation";
+import {Department} from "../departments/department";
 
 @Injectable({
   providedIn: 'root'
@@ -16,11 +17,17 @@ export class DesignationService {
   private ALL_DESIGNATIONS_URL = `${this.BASE_URL}/designations`;
   private DESIGNATION_CREATE_URL = `${this.BASE_URL}/designations`;
   private DESIGNATION_URL = `${this.BASE_URL}/designations/`;
+  private DESIGNATION_SEARCH_BY_NAME_URL = `${this.BASE_URL}/designations/search-by-name`;
 
   constructor(private http: HttpClient) { }
 
   getAllDesignations(params: HttpParams): Observable<Page> {
     return this.http.get<Page>(this.ALL_DESIGNATIONS_URL, { params });
+  }
+
+  getDesignations(term: string = null): Observable<Department[]> {
+    const params = new HttpParams().set('searchTerm', term);
+    return this.http.get<Department[]>(this.DESIGNATION_SEARCH_BY_NAME_URL, { params });
   }
 
   createDesignation(designation: Designation): Observable<Designation> {

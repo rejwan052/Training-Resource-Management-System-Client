@@ -16,12 +16,12 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ToastrModule} from 'ngx-toastr';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
-import {NgSelectizeModule} from 'ng-selectize';
 import {FooterComponent} from './footer/footer.component';
 import {NgxDatatableModule} from '@swimlane/ngx-datatable';
 import {EmployeeComponent} from './employee/employee.component';
 import {ConfirmationDialogComponent} from './shared/confirmation-dialog/confirmation-dialog.component';
 import {ModalModule} from "ngx-bootstrap";
+import {NgSelectModule} from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [
@@ -46,9 +46,9 @@ import {ModalModule} from "ngx-bootstrap";
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     BsDropdownModule.forRoot(),
-    NgSelectizeModule,
     NgxDatatableModule,
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    NgSelectModule
   ],
   entryComponents:[ConfirmationDialogComponent],
   providers: [],

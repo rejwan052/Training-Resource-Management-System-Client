@@ -198,10 +198,10 @@
                                    placeholder="Date of birth"
                                    class="form-control"
                                    name="dateOfBirth"
-                                   #dp="bsDatepicker"
                                    [(ngModel)]="employee.dateOfBirth"
                                    bsDatepicker
-                                   [bsValue]="employee.dateOfBirth">
+                                   [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }"
+                                   [(bsValue)]="selectedDateOfBirth">
                           </div>
                           <!--<span class="m-form__help">Please select date of birth</span>-->
                         </div>
@@ -231,38 +231,50 @@
                         <div class="col-lg-6 m-form__group-sub">
                           <label class="col-xl-5 col-lg-5 col-form-label">Designation: *</label>
                           <div class="">
-                            <ng-selectize [errorClass]="'invalid-input'"
-                                          [config]="designationConfig"
-                                          (focus)="designationNotFocused = false"
-                                          (focusout)="designationNotFocused = true"
-                                          name="designation"
-                                          placeholder="Select designation"
-                                          [(ngModel)]="employee.designationId"
-                                          #designationId="ngModel"
-                                          required="true">
 
-                            </ng-selectize>
-                            <div *ngIf="designationId.touched || designationNotFocused">
-                              <span *ngIf="designationId.hasError('required')" class="m-form__help invalid-input">Designation is required</span>
+                            <ng-select [items]="designations"
+                                       dropdownPosition="bottom"
+                                       bindLabel="name"
+                                       [loading]="designationLoading"
+                                       [typeahead]="designationSearchTerm$"
+                                       [(ngModel)]="selectedDesignation"
+                                       name="designation"
+                                       placeholder="Select designation"
+                                       typeToSearchText="Search designation"
+                                       notFoundText="No designation found"
+                                       (change)="onDesignationChange($event)"
+                                       (focus)="onDesignationFocus($event)"
+                                       #designation="ngModel"
+                                       required="true"
+                                       >
+                            </ng-select>
+
+                            <div *ngIf="designation.touched">
+                              <span *ngIf="designation.hasError('required')" class="m-form__help invalid-input">Designation is required</span>
                             </div>
                           </div>
                         </div>
                         <div class="col-lg-6 m-form__group-sub">
                           <label class="col-xl-5 col-lg-5 col-form-label">Department: *</label>
                           <div class="">
-                            <ng-selectize [errorClass]="'invalid-input'"
-                                          [config]="departmentConfig"
-                                          (focus)="departmentNotFocused = false"
-                                          (focusout)="departmentNotFocused = true"
-                                          name="department"
-                                          placeholder="Select department"
-                                          [(ngModel)]="employee.departmentId"
-                                          #departmentId="ngModel"
-                                          required="true">
-
-                            </ng-selectize>
-                            <div *ngIf="departmentId.touched || departmentNotFocused">
-                              <span *ngIf="departmentId.hasError('required')" class="m-form__help invalid-input">Department is required</span>
+                            <ng-select [items]="departments"
+                                       dropdownPosition="bottom"
+                                       bindLabel="name"
+                                       [loading]="departmentLoading"
+                                       [typeahead]="departmentSearchTerm$"
+                                       [(ngModel)]="selectedDepartment"
+                                       name="department"
+                                       placeholder="Select department"
+                                       typeToSearchText="Search department"
+                                       notFoundText="No department found"
+                                       (change)="onDepartmentChange($event)"
+                                       (focus)="onDepartmentFocus($event)"
+                                       #department="ngModel"
+                                       required="true"
+                                       >
+                            </ng-select>
+                            <div *ngIf="department.touched">
+                              <span *ngIf="department.hasError('required')" class="m-form__help invalid-input">Department is required</span>
                             </div>
                           </div>
                         </div>

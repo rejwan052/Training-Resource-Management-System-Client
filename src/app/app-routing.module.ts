@@ -12,7 +12,14 @@ const routes : Routes = [
   {path : '',redirectTo : 'dashboard', pathMatch : 'full'},
   {path : 'dashboard',component : DashboardComponent},
   {path : 'employee',component : EmployeeComponent},
-  {path : 'employees',component : EmployeesComponent},
+  // {path : 'employees',component : EmployeesComponent},
+  // {path : 'employees/:id',component : EmployeeComponent},
+  { path: 'employees',
+    children: [
+      { path: '', component: EmployeesComponent },
+      { path: ':id', component: EmployeeComponent }
+    ]
+  },
   {path : 'departments',component : DepartmentsComponent},
   {path : 'designations',component : DesignationsComponent},
   {path : '**', component : NotFoundComponent}

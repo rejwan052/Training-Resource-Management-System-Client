@@ -92,7 +92,7 @@
 													<i class="flaticon-users"></i>
 												</span>
                 <h3 class="m-portlet__head-text">
-                  Portlet sub title goes here
+                  All employees
                 </h3>
                 <h2 class="m-portlet__head-label m-portlet__head-label--primary">
                   <span>Employee List</span>
@@ -138,7 +138,7 @@
 
             <ng-template #actionButtons let-row="row" let-value="value" let-rowIndex="rowIndex" ngx-datatable-cell-template>
               <a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill"
-                 (click)="editEmployee(value)"
+                 [routerLink]="['/employees', value]"
                  title="Edit employee"><i class="la la-edit"></i>
               </a>
               <a class="m-portlet__nav-link btn m-btn m-btn--hover-danger m-btn--icon m-btn--icon-only m-btn--pill"

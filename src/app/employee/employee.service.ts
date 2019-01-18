@@ -3,7 +3,7 @@ import {environment} from "../../environments/environment";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Page} from "../shared/models/page";
-import {Employee} from "./employee";
+import {Employee} from "./model/employee";
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,7 @@ export class EmployeeService {
 
   private BASE_URL = environment.baseUrl;
 
-  // Employee URLs
+  // EmployeeRequest URLs
   private ALL_EMPLOYEES_URL = `${this.BASE_URL}/employees`;
   private EMPLOYEE_CREATE_URL = `${this.BASE_URL}/employees`;
   private EMPLOYEE_URL = `${this.BASE_URL}/employees/`;

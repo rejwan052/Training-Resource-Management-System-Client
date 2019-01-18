@@ -61,6 +61,7 @@ export class EmployeesComponent implements OnInit {
     this.employeeService.getEmployees(params).pipe(delay(500)).subscribe(
       res => {
         this.page = res;
+        console.log("Page response ",res);
         this.isLoading = false;
       },
       err => {
@@ -70,9 +71,9 @@ export class EmployeesComponent implements OnInit {
     );
   }
 
-  editEmployee(employeeId:number) : void {
+ /* editEmployee(employeeId:number) : void {
     console.log("Edit employeeId ",employeeId);
-  }
+  }*/
 
   deleteEmployee(employeeId:number) : void {
     console.log("Delete employeeId ",employeeId);
@@ -80,16 +81,15 @@ export class EmployeesComponent implements OnInit {
     this.modalRef.content.onClose.subscribe(result => {
       console.log('results', result);
       if(result){
-        // Employee delete service
+        // EmployeeRequest delete service
         this.employeeService.deleteEmployee(employeeId).subscribe(
           res =>{
             this.toastr.success('', 'Employee delete successfully.');
             const params = new HttpParams().set('page', this.page.pageable.pageNumber.toString());
             this.getAllEmployees(params);
           },
-          err => {
-            console.log("Error occurred while delete employee ",employeeId)
-          }
+          err => console.log("Error occurred while delete employee ",employeeId)
+
         );
       }else{
 
